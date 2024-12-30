@@ -40,7 +40,7 @@ func SetInterfaceChannel(iface string, channel int) error {
 	}
 
 	if core.HasBinary("iw") {
-		Debug("*** SetInterfaceChannel(%s, %d) iw based ***", iface, channel)
+		// Debug("*** SetInterfaceChannel(%s, %d) iw based ***", iface, channel)
 		out, err := core.Exec("iw", []string{"dev", iface, "set", "channel", fmt.Sprintf("%d", channel)})
 		if err != nil {
 			return fmt.Errorf("iw: out=%s err=%s", out, err)
@@ -128,7 +128,7 @@ func iwSupportedFrequencies(iface string) ([]int, error) {
 	for scanner.Scan() {
 		line := scanner.Text()
 		matches := iwFreqParser.FindStringSubmatch(line)
-                Debug("line = %s / matches = %s", line, matches)
+                // Debug("line = %s / matches = %s", line, matches)
 		if len(matches) == 2 {
 			if freq, err := strconv.ParseInt(matches[1], 10, 64); err != nil {
 				return nil, fmt.Errorf("error parsing %s freq: %v (line: %s)", iface, err, line)
