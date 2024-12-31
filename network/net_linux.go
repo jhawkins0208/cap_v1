@@ -41,7 +41,9 @@ func SetInterfaceChannel(iface string, channel int) error {
 
 	if core.HasBinary("iw") {
 		// Debug("*** SetInterfaceChannel(%s, %d) iw based ***", iface, channel)
-		out, err := core.Exec("iw", []string{"dev", iface, "set", "channel", fmt.Sprintf("%d", channel)})
+		// out, err := core.Exec("iw", []string{"dev", iface, "set", "channel", fmt.Sprintf("%d", channel)})
+		out, err := core.Exec("iw", []string{"dev", iface, "set", "freq", fmt.Sprintf("%d", Dot11Chan2Freq(channel))})
+
 		if err != nil {
 			return fmt.Errorf("iw: out=%s err=%s", out, err)
 		} else if out != "" {
